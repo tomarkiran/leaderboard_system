@@ -78,22 +78,25 @@ export default function App() {
       />
 
       {searchText.trim() !== "" && (
-        <View style={styles.searchCard}>
-          {loading ? (
-            <Text style={styles.loadingText}>Searching...</Text>
-          ) : searchResults.length > 0 ? (
-            searchResults.map((user, index) => (
-              <Text key={index} style={styles.searchText}>
-                <Text style={styles.bold}>Global Rank:</Text> {user.Rank} |{" "}
-                <Text style={styles.bold}>Username:</Text> {user.Username} |{" "}
-                <Text style={styles.bold}>Rating:</Text> {user.Rating}
-              </Text>
-            ))
-          ) : (
-            <Text style={styles.noDataText}>Data not exists</Text>
-          )}
-        </View>
-      )}
+  <View style={styles.searchCard}>
+    {loading ? (
+      <Text style={styles.loadingText}>Searching...</Text>
+    ) : searchResults.length > 0 ? (
+      searchResults.map((user, index) => (
+        <Text key={index} style={styles.searchText}>
+          <Text style={styles.bold}>Global Rank:</Text>{" "}
+          {user.rank ?? user.Rank} |{" "}
+          <Text style={styles.bold}>Username:</Text>{" "}
+          {user.username ?? user.Username} |{" "}
+          <Text style={styles.bold}>Rating:</Text>{" "}
+          {user.rating ?? user.Rating}
+        </Text>
+      ))
+    ) : (
+      <Text style={styles.noDataText}>Data not exists</Text>
+    )}
+  </View>
+)}
     </View>
   );
 }

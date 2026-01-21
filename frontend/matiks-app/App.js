@@ -84,9 +84,9 @@ export default function App() {
           ) : searchResults.length > 0 ? (
             searchResults.map((user, index) => (
               <Text key={index} style={styles.searchText}>
-                <Text style={styles.bold}>Global Rank:</Text> {user.rank} |{" "}
-                <Text style={styles.bold}>Username:</Text> {user.username} |{" "}
-                <Text style={styles.bold}>Rating:</Text> {user.rating}
+                <Text style={styles.bold}>Global Rank:</Text> {user.Rank} |{" "}
+                <Text style={styles.bold}>Username:</Text> {user.Username} |{" "}
+                <Text style={styles.bold}>Rating:</Text> {user.Rating}
               </Text>
             ))
           ) : (

@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"os"
 )
 
 type User struct {
@@ -32,7 +33,13 @@ func main() {
 	http.HandleFunc("/update", randomUpdate)
 
 	log.Println("Backend running on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+if port == "" {
+	port = "8080"
+}
+
+log.Println("Server running on port", port)
+log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 //  --DATA INITIALIZATION--

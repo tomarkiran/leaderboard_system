@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 
-const API_BASE = "http://localhost:8080";
+const API_BASE = "https://leaderboard-system-backend-x3js.onrender.com";
 
 export default function App() {
   const [leaderboard, setLeaderboard] = useState([]);

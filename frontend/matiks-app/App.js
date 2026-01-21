@@ -54,7 +54,18 @@ export default function App() {
       .catch(err => console.error(err));
   }, []);
 
-  
+  // Search user when input changes
+  useEffect(() => {
+    if (searchText.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
+
+    fetch(`${API_BASE}/search?username=${searchText}`)
+      .then(res => res.json())
+      .then(data => setSearchResults(data))
+      .catch(err => console.error(err));
+  }, [searchText]);
 
   return (
     <View style={styles.container}>
@@ -71,13 +82,12 @@ export default function App() {
       {/* Leaderboard List */}
       <ScrollView style={styles.card}>
         {leaderboard.map((user, index) => (
-  <View key={index} style={styles.row}>
-    <Text style={styles.cell}>#{user.Rank}</Text>
-    <Text style={styles.cell}>{user.Username}</Text>
-    <Text style={styles.cell}>{user.Rating}</Text>
-  </View>
-))}
-
+          <View key={index} style={styles.row}>
+            <Text style={styles.cell}>#{user.Rank}</Text>
+            <Text style={styles.cell}>{user.Username}</Text>
+            <Text style={styles.cell}>{user.Rating}</Text>
+          </View>
+        ))}
       </ScrollView>
 
       {/* Search Input */}
@@ -95,12 +105,12 @@ export default function App() {
       <Text style={styles.loadingText}>Searching...</Text>
     ) : searchResults.length > 0 ? (
       searchResults.map((user, index) => (
-  <Text key={index} style={styles.searchText}>
-    <Text style={styles.bold}>Global Rank:</Text> {user.rank} |{" "}
-    <Text style={styles.bold}>Username:</Text> {user.username} |{" "}
-    <Text style={styles.bold}>Rating:</Text> {user.rating}
-  </Text>
-))
+        <Text key={index} style={styles.searchText}>
+          <Text style={styles.bold}>Global Rank:</Text> {user.Rank} |{" "}
+          <Text style={styles.bold}>Username:</Text> {user.Username} |{" "}
+          <Text style={styles.bold}>Rating:</Text> {user.Rating}
+        </Text>
+      ))
     ) : (
       <Text style={styles.noDataText}>Data not exists</Text>
     )}
@@ -172,22 +182,22 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
   },
+  searchTitle: {
+    fontWeight: "700",
+    marginBottom: 5,
+  },
   searchText: {
     fontSize: 14,
     color: "#1a4fb3",
   },
   bold: {
-    fontWeight: "700",
-  },
-  loadingText: {
-    fontSize: 14,
-    color: "#555",
-    fontStyle: "italic",
-  },
-  noDataText: {
-    fontSize: 14,
-    color: "#cc0000",
-    fontStyle: "italic",
-  },
-});
+  fontWeight: "700",
+},
+loadingText: {
+  fontSize: 14,
+  color: "#555",
+  fontStyle: "italic",
+},
 
+
+});

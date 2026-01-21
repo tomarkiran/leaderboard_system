@@ -54,18 +54,7 @@ export default function App() {
       .catch(err => console.error(err));
   }, []);
 
-  // Search user when input changes
-  useEffect(() => {
-    if (searchText.trim() === "") {
-      setSearchResults([]);
-      return;
-    }
-
-    fetch(`${API_BASE}/search?username=${searchText}`)
-      .then(res => res.json())
-      .then(data => setSearchResults(data))
-      .catch(err => console.error(err));
-  }, [searchText]);
+  
 
   return (
     <View style={styles.container}>
@@ -182,22 +171,22 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
   },
-  searchTitle: {
-    fontWeight: "700",
-    marginBottom: 5,
-  },
   searchText: {
     fontSize: 14,
     color: "#1a4fb3",
   },
   bold: {
-  fontWeight: "700",
-},
-loadingText: {
-  fontSize: 14,
-  color: "#555",
-  fontStyle: "italic",
-},
-
-
+    fontWeight: "700",
+  },
+  loadingText: {
+    fontSize: 14,
+    color: "#555",
+    fontStyle: "italic",
+  },
+  noDataText: {
+    fontSize: 14,
+    color: "#cc0000",
+    fontStyle: "italic",
+  },
 });
+
